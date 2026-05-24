@@ -37,6 +37,7 @@ jobs:
 
       - name: Run tests
         env:
+          PYTHONPATH: .
           GITHUB_CLIENT_ID: test_id
           GITHUB_CLIENT_SECRET: test_secret
           GROQ_API_KEY: test_key
@@ -62,11 +63,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-          cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Lint
         run: npm run lint || true
@@ -121,7 +120,7 @@ jobs:
         if: steps.detect.outputs.has_js == 'true' || steps.detect.outputs.has_ts == 'true'
         run: |
           if [ -f frontend/package.json ]; then
-            cd frontend && npm ci --silent && npm run lint || true
+            cd frontend && npm install --no-audit --no-fund --silent && npm run lint || true
           fi
 
       - name: Lint Dockerfiles (hadolint)
