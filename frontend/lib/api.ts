@@ -6,9 +6,18 @@
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
+  const token = typeof window !== "undefined" ? localStorage.getItem("prism_token") : null;
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+    ...options?.headers,
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`${API}${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json", ...options?.headers },
+    credentials: "omit", // We now use Bearer tokens
+    headers,
     ...options,
   });
   if (!res.ok) {

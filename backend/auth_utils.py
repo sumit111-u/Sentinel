@@ -3,7 +3,7 @@ JWT session token utilities.
 """
 from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
-from fastapi import Cookie, Depends, HTTPException, status
+from fastapi import Cookie, Depends, HTTPException, status, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -21,7 +21,7 @@ def create_session_token(user_id: int) -> str:
 
 
 async def get_current_user(
-    prism_session: str | None = Cookie(default=None),
+    request: Request,
     db: AsyncSession = Depends(get_db),
 ):
     from models import User
@@ -30,6 +30,14 @@ async def get_current_user(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Not authenticated",
     )
+    
+    auth_header = request.headers.get("Authorization")
+    prism_session = None
+    if auth_header and auth_header.startswith("Bearer "):
+        prism_session = auth_header.split(" ")[1]
+    else:
+        prism_session = request.cookies.get("prism_session")
+
     if not prism_session:
         raise credentials_exc
 

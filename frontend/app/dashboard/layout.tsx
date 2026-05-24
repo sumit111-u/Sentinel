@@ -29,14 +29,32 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // If we just logged in, the token will be in the URL query params
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenParam = urlParams.get("token");
+    if (tokenParam) {
+      localStorage.setItem("prism_token", tokenParam);
+      // Clean up the URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
     getMe()
       .then(setUser)
-      .catch(() => router.push("/"))
+      .catch(() => {
+        // If it fails, clear invalid token and redirect
+        localStorage.removeItem("prism_token");
+        router.push("/");
+      })
       .finally(() => setLoading(false));
   }, [router]);
 
   const handleLogout = async () => {
-    await logout();
+    try {
+      await logout();
+    } catch {
+      // ignore
+    }
+    localStorage.removeItem("prism_token");
     router.push("/");
   };
 

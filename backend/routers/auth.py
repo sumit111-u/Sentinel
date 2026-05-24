@@ -70,15 +70,9 @@ async def github_callback(
     # Issue JWT session token
     session_token = create_session_token(user.id)
 
-    redirect = RedirectResponse(url=f"{settings.FRONTEND_URL}/dashboard")
-    redirect.set_cookie(
-        key="prism_session",
-        value=session_token,
-        httponly=True,
-        secure=True,       # Required for cross-domain (HTTPS)
-        samesite="none",   # Required for Vercel -> Render cross-domain API calls
-        max_age=60 * 60 * 24 * 7,  # 7 days
-    )
+    # Instead of cross-domain cookies (which browsers block), pass the token safely in the URL
+    # to be picked up by the frontend and stored in localStorage.
+    redirect = RedirectResponse(url=f"{settings.FRONTEND_URL}/dashboard?token={session_token}")
     return redirect
 
 
