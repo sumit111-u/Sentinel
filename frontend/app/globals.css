@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* PRism dark-first color system */
+  --background: oklch(0.10 0 0);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.14 0 0);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.14 0 0);
+  --popover-foreground: oklch(0.97 0 0);
+
+  /* Vibrant violet-indigo primary */
+  --primary: oklch(0.68 0.22 285);
+  --primary-foreground: oklch(0.98 0 0);
+
+  --secondary: oklch(0.20 0 0);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.60 0 0);
+  --accent: oklch(0.22 0.04 285);
+  --accent-foreground: oklch(0.97 0 0);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.97 0 0);
+  --border: oklch(0.22 0 0);
+  --input: oklch(0.22 0 0);
+  --ring: oklch(0.68 0.22 285);
+  --radius: 0.75rem;
+
+  /* Severity colors */
+  --critical: oklch(0.58 0.22 27);
+  --warning: oklch(0.75 0.18 70);
+  --info: oklch(0.62 0.18 240);
+  --success: oklch(0.68 0.18 150);
+}
+
+@theme inline {
+  --font-sans: "Inter", "Inter Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", sans-serif;
+  }
+}
+
+/* ── Glassmorphism utility ── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Animated gradient mesh background ── */
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, oklch(0.68 0.22 285 / 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, oklch(0.62 0.18 240 / 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 60% 80%, oklch(0.58 0.22 27 / 0.06) 0%, transparent 60%),
+    oklch(0.10 0 0);
+}
+
+/* ── Glow utilities ── */
+.glow-primary {
+  box-shadow: 0 0 24px oklch(0.68 0.22 285 / 0.35);
+}
+.glow-critical {
+  box-shadow: 0 0 12px oklch(0.58 0.22 27 / 0.4);
+}
+
+/* ── Severity badges ── */
+.badge-critical {
+  background: oklch(0.58 0.22 27 / 0.15);
+  color: oklch(0.78 0.14 27);
+  border: 1px solid oklch(0.58 0.22 27 / 0.35);
+}
+.badge-warning {
+  background: oklch(0.75 0.18 70 / 0.15);
+  color: oklch(0.85 0.12 70);
+  border: 1px solid oklch(0.75 0.18 70 / 0.35);
+}
+.badge-info {
+  background: oklch(0.62 0.18 240 / 0.15);
+  color: oklch(0.78 0.12 240);
+  border: 1px solid oklch(0.62 0.18 240 / 0.35);
+}
+.badge-clean {
+  background: oklch(0.68 0.18 150 / 0.15);
+  color: oklch(0.78 0.12 150);
+  border: 1px solid oklch(0.68 0.18 150 / 0.35);
+}
+
+/* ── Smooth transitions ── */
+* {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.14 0 0);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.28 0 0);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.68 0.22 285 / 0.6);
+}
+
+/* ── Code block ── */
+.code-block {
+  background: oklch(0.08 0 0);
+  border: 1px solid oklch(0.22 0 0);
+  border-radius: 0.5rem;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  padding: 1rem;
+}
