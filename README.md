@@ -1,6 +1,6 @@
 <div align="center">
 
-![PRism Banner](./assets/banner.png)
+![PRism Banner](banner_image.png)
 
 <br/>
 
