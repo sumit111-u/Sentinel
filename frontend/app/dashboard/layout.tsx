@@ -10,9 +10,9 @@ import {
   Settings,
   LogOut,
   ChevronRight,
-  Bell,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SentinelLogo } from "@/components/sentinel-logo";
 import { getMe, logout, type User } from "@/lib/api";
 
 const navItems = [
@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get("token");
     if (tokenParam) {
-      localStorage.setItem("prism_token", tokenParam);
+      localStorage.setItem("sentinel_token", tokenParam);
       // Clean up the URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
@@ -42,7 +42,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       .then(setUser)
       .catch(() => {
         // If it fails, clear invalid token and redirect
-        localStorage.removeItem("prism_token");
+        localStorage.removeItem("sentinel_token");
         router.push("/");
       })
       .finally(() => setLoading(false));
@@ -54,7 +54,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     } catch {
       // ignore
     }
-    localStorage.removeItem("prism_token");
+    localStorage.removeItem("sentinel_token");
     router.push("/");
   };
 
@@ -63,7 +63,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="flex h-screen items-center justify-center bg-background">
         <div className="flex items-center gap-3 text-muted-foreground">
           <div className="h-5 w-5 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-          Loading PRism...
+          Loading Sentinel...
         </div>
       </div>
     );
@@ -75,11 +75,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside className="w-64 flex flex-col border-r border-border/50 bg-card/50">
         {/* Logo */}
         <div className="p-5 border-b border-border/50">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center glow-primary">
-              <GitPullRequest className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="font-bold text-foreground text-lg">PRism</span>
+          <Link href="/">
+            <SentinelLogo size={32} wordmarkClassName="text-lg" className="hover:opacity-90 transition-opacity" />
           </Link>
         </div>
 

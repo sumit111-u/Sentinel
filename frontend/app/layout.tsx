@@ -5,13 +5,17 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "PRism — AI Code Review for Engineering Teams",
+  title: "Sentinel — AI Pull Request Guardian",
   description:
-    "PRism detects bugs, security vulnerabilities, performance bottlenecks, and code smells in your pull requests automatically using AI.",
-  keywords: ["code review", "AI", "pull request", "GitHub", "security", "DevOps"],
+    "Sentinel watches your pull requests around the clock — surfacing bugs, security risks, performance issues, and code quality problems before they ship.",
+  keywords: ["code review", "AI", "pull request", "GitHub", "security", "DevOps", "Sentinel"],
+  icons: {
+    icon: "/sentinel-icon.png",
+    apple: "/sentinel-icon.png",
+  },
   openGraph: {
-    title: "PRism — AI Code Review",
-    description: "Automated, intelligent PR reviews powered by AI.",
+    title: "Sentinel — AI Pull Request Guardian",
+    description: "Automated PR analysis that keeps your main branch safe.",
     type: "website",
   },
 };

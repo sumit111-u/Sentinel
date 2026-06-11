@@ -8,10 +8,11 @@ import {
   MessageSquareCode,
   ArrowRight,
   CheckCircle2,
-  Star,
+  Radar,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { SentinelLogo } from "@/components/sentinel-logo";
 
 
 
@@ -50,7 +51,7 @@ const features = [
     icon: GitPullRequest,
     title: "GitHub Native",
     description:
-      "Connect with GitHub OAuth. PRism reviews any PR in any repo you have access to, with inline comments posted automatically.",
+      "Connect with GitHub OAuth. Sentinel scans any PR in repos you can access and posts inline review comments automatically.",
     color: "text-blue-400",
   },
   {
@@ -63,31 +64,31 @@ const features = [
 ];
 
 const stats = [
-  { value: "< 30s", label: "Average Review Time" },
-  { value: "6", label: "Issue Categories" },
-  { value: "15+", label: "Languages Supported" },
+  { value: "< 30s", label: "Typical scan time" },
+  { value: "6", label: "Review dimensions" },
+  { value: "15+", label: "Languages detected" },
 ];
 
 const howItWorks = [
   {
     step: "01",
     title: "Connect GitHub",
-    description: "OAuth with GitHub — PRism gets read access to your repos and PRs.",
+    description: "One-click OAuth — Sentinel only requests the scopes it needs to read repos and PRs.",
   },
   {
     step: "02",
-    title: "Select a PR",
-    description: "Choose any open pull request from your repositories to review.",
+    title: "Pick a pull request",
+    description: "Browse open PRs across your org and choose what to put on watch.",
   },
   {
     step: "03",
-    title: "AI Reviews Instantly",
-    description: "Our Llama 3.3 70B AI analyzes the diff and generates structured findings.",
+    title: "Scan the diff",
+    description: "Llama 3.3 70B reviews the change set and ranks findings by severity.",
   },
   {
     step: "04",
-    title: "Get Results",
-    description: "View results on your dashboard and automatically get comments posted on the PR.",
+    title: "Act on insights",
+    description: "See the full report in your dashboard; comments land on GitHub and Discord automatically.",
   },
 ];
 
@@ -101,11 +102,8 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center glow-primary">
-                <GitPullRequest className="h-4 w-4 text-primary-foreground" />
-              </div>
-              <span className="text-lg font-bold text-foreground">PRism</span>
-              <Badge className="badge-info ml-1 text-[10px] px-1.5 py-0">Beta</Badge>
+              <SentinelLogo size={32} wordmarkClassName="text-lg" />
+              <Badge className="badge-info text-[10px] px-1.5 py-0">Beta</Badge>
             </div>
             <div className="flex items-center gap-3">
               <Link href="#features">
@@ -135,20 +133,20 @@ export default function LandingPage() {
       <section className="hero-mesh relative overflow-hidden">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-24 sm:py-36 text-center relative z-10">
           <Badge className="badge-info mb-6 px-3 py-1 text-sm inline-flex gap-2 items-center">
-            <Star className="h-3 w-3" />
-            AI-Powered Code Review — For Real Teams
+            <Radar className="h-3 w-3" />
+            Always-on pull request protection
           </Badge>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-tight">
-            Stop missing bugs
+            Guard every merge
             <br />
-            <span className="text-primary">in pull requests.</span>
+            <span className="text-primary">before it ships.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            PRism is an AI agent that reviews your PRs in seconds — detecting bugs, security
-            vulnerabilities, performance bottlenecks, and code smells automatically, then posting
-            actionable comments directly on GitHub.
+            Sentinel is an AI guardian for your pull requests — it scans diffs in seconds for bugs,
+            security flaws, performance regressions, and code smells, then posts actionable feedback
+            on GitHub and alerts your team on Discord.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -176,7 +174,7 @@ export default function LandingPage() {
           </div>
 
           <p className="mt-6 text-sm text-muted-foreground/70">
-            No credit card required · GitHub OAuth · Works with any repo
+            Free to start · GitHub OAuth · Self-hostable backend
           </p>
         </div>
 
@@ -187,7 +185,7 @@ export default function LandingPage() {
               <div className="h-2 w-2 rounded-full bg-red-400" />
               <div className="h-2 w-2 rounded-full bg-yellow-400" />
               <div className="h-2 w-2 rounded-full bg-green-400" />
-              <span className="ml-2 text-xs text-muted-foreground font-mono">PRism — AI Review</span>
+              <span className="ml-2 text-xs text-muted-foreground font-mono">Sentinel — PR Scan</span>
             </div>
             <div className="space-y-3">
               <div className="flex items-start gap-3 p-3 rounded-lg bg-red-500/5 border border-red-500/20">
@@ -251,11 +249,11 @@ export default function LandingPage() {
         <div className="text-center mb-16">
           <Badge className="badge-info mb-4">Features</Badge>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Everything your team needs
+            Built for teams who ship fast
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            PRism covers the full spectrum of code quality — from critical security flaws to subtle
-            style inconsistencies.
+            One platform for security, reliability, and maintainability — without slowing down your
+            review cycle.
           </p>
         </div>
 
@@ -283,7 +281,7 @@ export default function LandingPage() {
           <div className="text-center mb-16">
             <Badge className="badge-info mb-4">Process</Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Up and running in minutes
+              Four steps to your first scan
             </h2>
           </div>
 
@@ -312,10 +310,11 @@ export default function LandingPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-blue-500/5 pointer-events-none" />
           <div className="relative z-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Start reviewing smarter today
+              Put Sentinel on watch duty
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Connect your GitHub account and get your first AI-powered PR review in under 30 seconds.
+              Link GitHub, trigger your first review, and let the guardian handle the rest — usually
+              in under half a minute.
             </p>
             <a href={loginUrl}>
               <Button
@@ -347,14 +346,9 @@ export default function LandingPage() {
       <footer className="border-t border-border/50 bg-muted/20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
-                <GitPullRequest className="h-3.5 w-3.5 text-primary-foreground" />
-              </div>
-              <span className="font-semibold text-sm text-foreground">PRism</span>
-            </div>
+            <SentinelLogo size={24} wordmarkClassName="text-sm font-semibold" />
             <p className="text-xs text-muted-foreground">
-              © 2025 PRism · AI-Powered Code Review
+              © 2026 Sentinel · AI Pull Request Guardian
             </p>
           </div>
         </div>

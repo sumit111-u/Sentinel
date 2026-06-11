@@ -1,19 +1,19 @@
 <div align="center">
 
-![PRism Banner](banner_image.png)
+![Sentinel](assets/sentinel-icon.png)
 
 <br/>
 
-**PRism** is a self-hosted AI code review agent that connects to GitHub via OAuth, fetches pull request diffs, and runs structured analysis using **Llama 3.3 70B on Groq** — surfacing bugs, security vulnerabilities, performance bottlenecks, and code smells in seconds.
+**Sentinel** is a self-hosted AI code review agent that connects to GitHub via OAuth, fetches pull request diffs, and runs structured analysis using **Llama 3.3 70B on Groq** — surfacing bugs, security vulnerabilities, performance bottlenecks, and code smells in seconds.
 
 <br/>
 
-[![CI](https://github.com/wizardwithcodehazard/PRism/actions/workflows/ci.yml/badge.svg)](https://github.com/wizardwithcodehazard/PRism/actions/workflows/ci.yml)
-[![Deploy](https://github.com/wizardwithcodehazard/PRism/actions/workflows/deploy.yml/badge.svg)](https://github.com/wizardwithcodehazard/PRism/actions/workflows/deploy.yml)
+[![CI](.github/workflows/ci.yml)](.github/workflows/ci.yml)
+[![Deploy](.github/workflows/deploy.yml)](.github/workflows/deploy.yml)
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)
-![License](https://img.shields.io/github/license/wizardwithcodehazard/PRism)
+![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-beta-orange)
 
 </div>
@@ -24,10 +24,10 @@
 
 Modern engineering teams review hundreds of pull requests each week. Human reviewers are inconsistent and slow — especially for cross-cutting concerns like security, performance, and code hygiene. Static analysis tools generate noise without context. AI review tools charge per seat at enterprise prices.
 
-**PRism takes a different approach.** A developer opens a PR. PRism fetches the diff, passes it to a 70B LLM with a structured prompt, and posts an actionable review directly on GitHub — with severity levels, file locations, line numbers, and concrete fix suggestions. A Discord notification lands in the team channel simultaneously.
+**Sentinel takes a different approach.** A developer opens a PR. Sentinel fetches the diff, passes it to a 70B LLM with a structured prompt, and posts an actionable review directly on GitHub — with severity levels, file locations, line numbers, and concrete fix suggestions. A Discord notification lands in the team channel simultaneously.
 
 **Engineering philosophy:**
-- **Occam's Razor** — The simplest architecture that solves the real problem. PRism avoids distributed queues and microservices until load demands it.
+- **Occam's Razor** — The simplest architecture that solves the real problem. Sentinel avoids distributed queues and microservices until load demands it.
 - **Automation-first** — Zero friction from commit to review. The system does the work; developers stay in flow.
 - **ChatOps as a first-class citizen** — Reviews surface in Discord where the team already communicates.
 - **Structured AI output** — The model returns typed JSON (`severity`, `category`, `file`, `line`, `message`, `suggestion`), making results machine-parseable without prompt fragility.
@@ -56,7 +56,7 @@ Modern engineering teams review hundreds of pull requests each week. Human revie
 
 ## System Architecture
 
-PRism is structured in three clear layers: a Next.js frontend, a FastAPI backend with modular routers, and an AI engine powered by Groq. All GitHub interaction (OAuth, PR fetching, comment posting) flows through a dedicated client module. Reviews are processed asynchronously — the HTTP response returns immediately while the diff-fetch → AI-call → notify pipeline runs in the background.
+Sentinel is structured in three clear layers: a Next.js frontend, a FastAPI backend with modular routers, and an AI engine powered by Groq. All GitHub interaction (OAuth, PR fetching, comment posting) flows through a dedicated client module. Reviews are processed asynchronously — the HTTP response returns immediately while the diff-fetch → AI-call → notify pipeline runs in the background.
 
 ```mermaid
 graph LR
@@ -202,7 +202,7 @@ flowchart LR
 
 ## ChatOps Integration
 
-Configure a Discord webhook in **Dashboard → Settings**. After each review, PRism sends a color-coded embed:
+Configure a Discord webhook in **Dashboard → Settings**. After each review, Sentinel sends a color-coded embed:
 
 ```mermaid
 flowchart LR
@@ -221,11 +221,11 @@ flowchart LR
     I -->|"Error"| K["Silently fail\nnon-blocking"]
 ```
 
-**Setup:** Go to Discord channel → Settings → Integrations → Webhooks → New Webhook. Paste the URL in PRism Settings. Done.
+**Setup:** Go to Discord channel → Settings → Integrations → Webhooks → New Webhook. Paste the URL in Sentinel Settings. Done.
 
 **Embed format:**
 ```
-🔮 PRism Review — feat: add rate limiting middleware
+🛡️ Sentinel Review — feat: add rate limiting middleware
 Quality Score │ 71/100 [███████░░░]
 Status        │ 🔴 Needs Attention
 Issues        │ 🔴 1 Critical  ·  🟡 3 Warnings  ·  🔵 2 Info
@@ -362,8 +362,8 @@ Copy the **Client ID** and generate a **Client Secret**.
 ### 2. Backend
 
 ```bash
-git clone https://github.com/wizardwithcodehazard/PRism.git
-cd PRism/backend
+git clone <your-repo-url>
+cd sentinel/backend
 cp .env.example .env
 ```
 
@@ -375,7 +375,7 @@ GITHUB_CLIENT_SECRET=your_client_secret
 GROQ_API_KEY=your_groq_key
 SECRET_KEY=a-random-32-char-secret
 FRONTEND_URL=http://localhost:3000
-DATABASE_URL=sqlite+aiosqlite:///./prism.db
+DATABASE_URL=sqlite+aiosqlite:///./sentinel.db
 ```
 
 ```bash
@@ -398,14 +398,14 @@ npm run dev
 
 ```bash
 cd backend
-docker build -t prism-backend .
+docker build -t sentinel-backend .
 docker run -p 8000:8000 \
   -e GITHUB_CLIENT_ID=... \
   -e GITHUB_CLIENT_SECRET=... \
   -e GROQ_API_KEY=... \
   -e SECRET_KEY=... \
   -e FRONTEND_URL=http://localhost:3000 \
-  prism-backend
+  sentinel-backend
 ```
 
 ### Troubleshooting
@@ -419,7 +419,7 @@ The callback URL in your GitHub OAuth App must exactly match `http://localhost:3
 <details>
 <summary><strong>Reviews always return fallback (score: 50, no comments)</strong></summary>
 
-PRism handles Groq parse failures gracefully. If this is persistent, verify `GROQ_API_KEY` is valid and has available quota. Check the backend logs for the raw Groq response.
+Sentinel handles Groq parse failures gracefully. If this is persistent, verify `GROQ_API_KEY` is valid and has available quota. Check the backend logs for the raw Groq response.
 </details>
 
 <details>
@@ -501,7 +501,7 @@ Interactive Swagger UI: `http://localhost:8000/docs`
 <details>
 <summary><strong>Structured LLM Output</strong></summary>
 
-PRism constrains the model to return a strict JSON schema — not freeform text. Temperature `0.1` (near-deterministic) minimizes hallucination. A regex post-processor strips markdown fences the model adds despite explicit prohibition — a known LLM behavior. A safe fallback handles unparseable responses so the pipeline never crashes.
+Sentinel constrains the model to return a strict JSON schema — not freeform text. Temperature `0.1` (near-deterministic) minimizes hallucination. A regex post-processor strips markdown fences the model adds despite explicit prohibition — a known LLM behavior. A safe fallback handles unparseable responses so the pipeline never crashes.
 </details>
 
 <details>
@@ -513,20 +513,20 @@ Review jobs run as FastAPI `BackgroundTask` instances. The HTTP response returns
 <details>
 <summary><strong>Dynamic Language Detection</strong></summary>
 
-PRism infers programming languages from file extension mappings across 15+ languages — Python, TypeScript, Go, Rust, Java, C#, PHP, Kotlin, Scala, Shell, YAML, Terraform, Docker. This feeds both the AI prompt (scoping analysis) and the CI pipeline (selecting linters per PR).
+Sentinel infers programming languages from file extension mappings across 15+ languages — Python, TypeScript, Go, Rust, Java, C#, PHP, Kotlin, Scala, Shell, YAML, Terraform, Docker. This feeds both the AI prompt (scoping analysis) and the CI pipeline (selecting linters per PR).
 </details>
 
 <details>
 <summary><strong>Diff Truncation</strong></summary>
 
-For large diffs, PRism applies symmetric truncation: preserve the first and last `N/2` characters, insert a visible `[diff truncated]` marker. This ensures both the imports/context at the top and the latest changes at the bottom remain visible to the model within the 12,000-char budget.
+For large diffs, Sentinel applies symmetric truncation: preserve the first and last `N/2` characters, insert a visible `[diff truncated]` marker. This ensures both the imports/context at the top and the latest changes at the bottom remain visible to the model within the 12,000-char budget.
 </details>
 
 ---
 
 ## Scalability & Roadmap
 
-PRism starts intentionally simple. The migration path is straightforward as load grows:
+Sentinel starts intentionally simple. The migration path is straightforward as load grows:
 
 | Phase | Architecture | Handles |
 |---|---|---|
@@ -579,7 +579,7 @@ The SQLAlchemy ORM is already async-compatible — migrating from SQLite to Post
 ## Repository Structure
 
 ```
-PRism/
+Sentinel/
 ├── .github/
 │   └── workflows/
 │       ├── ci.yml              # Test · lint · build

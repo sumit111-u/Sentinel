@@ -1,12 +1,12 @@
 /**
- * Typed API client for PRism backend.
+ * Typed API client for Sentinel backend.
  * All requests include credentials (cookies) for session auth.
  */
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
-  const token = typeof window !== "undefined" ? localStorage.getItem("prism_token") : null;
+  const token = typeof window !== "undefined" ? localStorage.getItem("sentinel_token") : null;
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     ...(options?.headers as Record<string, string>),

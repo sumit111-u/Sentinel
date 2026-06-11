@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Sentinel">
+  <rect width="32" height="32" rx="8" fill="#0d9488"/>
+  <path
+    d="M16 5L8 9.2v6.3c0 5.2 3.4 10.1 8 11.5 4.6-1.4 8-6.3 8-11.5V9.2L16 5z"
+    stroke="#f0fdfa"
+    stroke-width="1.6"
+    stroke-linejoin="round"
+  />
+  <circle cx="16" cy="14.5" r="2.2" fill="#f0fdfa"/>
+  <path d="M16 16.8v3.2" stroke="#f0fdfa" stroke-width="1.4" stroke-linecap="round"/>
+  <path
+    d="M12.5 12.5c1.2-1.5 2.8-2.2 3.5-2.2s2.3.7 3.5 2.2"
+    stroke="#5eead4"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    opacity="0.9"
+  />
+</svg>

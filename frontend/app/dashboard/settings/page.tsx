@@ -53,7 +53,7 @@ export default function SettingsPage() {
     <div className="p-8 max-w-2xl">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground mb-1">Settings</h1>
-        <p className="text-muted-foreground">Customize how PRism reviews your code</p>
+        <p className="text-muted-foreground">Customize how Sentinel analyzes your pull requests</p>
       </div>
 
       {/* Review Preferences */}

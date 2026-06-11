@@ -2,7 +2,7 @@
 
 import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { GitPullRequest } from "lucide-react";
+import { SentinelLogo } from "@/components/sentinel-logo";
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -31,9 +31,7 @@ export default function AuthCallbackPage() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center">
       <div className="text-center space-y-4">
-        <div className="h-12 w-12 rounded-xl bg-primary/15 flex items-center justify-center mx-auto">
-          <GitPullRequest className="h-6 w-6 text-primary" />
-        </div>
+        <SentinelLogo size={48} showWordmark={false} className="justify-center mx-auto" />
         <div className="flex items-center gap-3 text-muted-foreground">
           <div className="h-4 w-4 rounded-full border-2 border-primary border-t-transparent animate-spin" />
           <span className="text-sm">Connecting your GitHub account...</span>

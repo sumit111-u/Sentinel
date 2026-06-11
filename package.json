@@ -1,14 +1,18 @@
 {
-  "name": "prism",
+  "name": "sentinel",
   "private": true,
   "version": "1.0.0",
-  "description": "AI-Powered Code Review Assistant for Engineering Teams",
+  "description": "AI Pull Request Guardian for Engineering Teams",
   "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && uvicorn main:app --reload --port 8000",
-    "install:frontend": "cd frontend && npm install",
-    "install:backend": "cd backend && pip install -r requirements.txt",
-    "test:backend": "cd backend && pytest tests/ -v",
-    "lint:frontend": "cd frontend && npm run lint"
+    "dev:backend": "cd backend && npm run dev",
+    "db:setup": "cd backend && npm run db:push",
+    "lint:frontend": "cd frontend && npm run lint",
+    "test:backend": "cd backend && npm test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

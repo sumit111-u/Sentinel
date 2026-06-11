@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* PRism dark-first color system */
+  /* Sentinel dark-first color system */
   --background: oklch(0.10 0 0);
   --foreground: oklch(0.97 0 0);
   --card: oklch(0.14 0 0);
@@ -12,21 +12,21 @@
   --popover: oklch(0.14 0 0);
   --popover-foreground: oklch(0.97 0 0);
 
-  /* Vibrant violet-indigo primary */
-  --primary: oklch(0.68 0.22 285);
+  /* Teal sentinel primary */
+  --primary: oklch(0.65 0.14 195);
   --primary-foreground: oklch(0.98 0 0);
 
   --secondary: oklch(0.20 0 0);
   --secondary-foreground: oklch(0.97 0 0);
   --muted: oklch(0.18 0 0);
   --muted-foreground: oklch(0.60 0 0);
-  --accent: oklch(0.22 0.04 285);
+  --accent: oklch(0.22 0.04 195);
   --accent-foreground: oklch(0.97 0 0);
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.97 0 0);
   --border: oklch(0.22 0 0);
   --input: oklch(0.22 0 0);
-  --ring: oklch(0.68 0.22 285);
+  --ring: oklch(0.65 0.14 195);
   --radius: 0.75rem;
 
   /* Severity colors */
@@ -83,15 +83,15 @@
 /* ── Animated gradient mesh background ── */
 .hero-mesh {
   background:
-    radial-gradient(ellipse 80% 60% at 20% 40%, oklch(0.68 0.22 285 / 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 20%, oklch(0.62 0.18 240 / 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 20% 40%, oklch(0.65 0.14 195 / 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, oklch(0.58 0.12 175 / 0.10) 0%, transparent 60%),
     radial-gradient(ellipse 70% 60% at 60% 80%, oklch(0.58 0.22 27 / 0.06) 0%, transparent 60%),
     oklch(0.10 0 0);
 }
 
 /* ── Glow utilities ── */
 .glow-primary {
-  box-shadow: 0 0 24px oklch(0.68 0.22 285 / 0.35);
+  box-shadow: 0 0 24px oklch(0.65 0.14 195 / 0.35);
 }
 .glow-critical {
   box-shadow: 0 0 12px oklch(0.58 0.22 27 / 0.4);
@@ -138,7 +138,7 @@
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.68 0.22 285 / 0.6);
+  background: oklch(0.65 0.14 195 / 0.6);
 }
 
 /* ── Code block ── */
